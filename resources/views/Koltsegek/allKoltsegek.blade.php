@@ -1,7 +1,7 @@
 @extends('layouts/main-dashboard')
 
 
-@section('title', 'Shops')
+@section('title', 'Kiadások')
 @section('app-main')
 
 <div class="d-flex flex-column flex-column-fluid">
@@ -12,7 +12,7 @@
 			<!--begin::Page title-->
 			<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
 				<!--begin::Title-->
-				<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Shops</h1>
+				<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Költséek</h1>
 				<!--end::Title-->
 
 			</div>
@@ -54,7 +54,7 @@
 					<!--begin::Card toolbar-->
 					<div class="card-toolbar">
 						<!--begin::Add customer-->
-						<a href="{{ url('shops/add')}}" class="btn btn-primary">Add Shop</a>
+						<a href="/expenses/addbandexpenses/" class="btn btn-primary">Új Költsé</a>
 						<!--end::Add customer-->
 					</div>
 					<!--end::Card toolbar-->
@@ -70,13 +70,11 @@
 								<thead>
 									<!--begin::Table row-->
 									<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-										<th class="min-w-150px sorting" tabindex="0" aria-controls="kt_ecommerce_category_table" rowspan="1" colspan="1" aria-label="Shop Name: activate to sort column ascending" style="width: 150px;">Shop Name</th>
-										<th class="min-w-150px sorting_disabled" rowspan="1" colspan="1" aria-label="Company Name " style="width: 150px;">Company Name </th>
-										<th class="min-w-150px sorting_disabled" rowspan="1" colspan="1" aria-label="Company Address" style="width: 150px;">Company Address</th>
-										<th class="min-w-150px sorting" tabindex="0" aria-controls="kt_ecommerce_category_table" rowspan="1" colspan="1" aria-label="Tax ID: activate to sort column ascending" style="width: 150px;">Tax ID</th>
-										<th class="min-w-150px sorting" tabindex="0" aria-controls="kt_ecommerce_category_table" rowspan="1" colspan="1" aria-label="Shop address: activate to sort column ascending" style="width: 150px;">Shop address</th>
-										<th class="min-w-150px sorting" tabindex="0" aria-controls="kt_ecommerce_category_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 150px;">Date</th>
-										<th class="text-end min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_category_table" rowspan="1" colspan="1" aria-label="Actions: activate to sort column ascending" style="width: 77.9688px;">Actions</th>
+										<th class="min-w-150px sorting" tabindex="0" aria-controls="kt_ecommerce_category_table" rowspan="1" colspan="1" aria-label="Költség: activate to sort column ascending" style="width: 191.922px;">Költség</th>
+										<th class="min-w-150px sorting_disabled" rowspan="1" colspan="1" aria-label="Megjegyzés " style="width: 197.359px;">Megjegyzés </th>
+										<th class="min-w-150px sorting_disabled" rowspan="1" colspan="1" aria-label="Alap anyag" style="width: 197.359px;">Alap anyag</th>
+										<th class="min-w-150px sorting" tabindex="0" aria-controls="kt_ecommerce_category_table" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 194.641px;">Date</th>
+										<th class="text-end min-w-70px sorting" tabindex="0" aria-controls="kt_ecommerce_category_table" rowspan="1" colspan="1" aria-label="Actions: activate to sort column ascending" style="width: 125.719px;">Actions</th>
 									</tr>
 									<!--end::Table row-->
 								</thead>
@@ -88,7 +86,7 @@
 
 									<!--end::Table row-->
 
-				@foreach($shops as $shop)
+
 
 									<tr class="odd">
 
@@ -98,7 +96,7 @@
 
 												<div class="ms-5">
 													<!--begin::Title-->
-													<a href="" class="text-gray-800 text-hover-primary fs-5 fw-bold mb-1" data-kt-ecommerce-category-filter="category_name">{{$shop->shop_name}}</a>
+													<a class="text-gray-800 text-hover-primary fs-5 fw-bold mb-1" data-kt-ecommerce-category-filter="category_name">pita</a>
 													<!--end::Title-->
 
 												</div>
@@ -112,7 +110,7 @@
 
 												<div class="ms-5">
 													<!--begin::Title-->
-													<a href="" class="text-gray-800 text-hover-primary fs-5 fw-bold mb-1" data-kt-ecommerce-category-filter="category_name">{{$shop->company_name}}</a>
+													<a class="text-gray-800 text-hover-primary fs-5 fw-bold mb-1" data-kt-ecommerce-category-filter="category_name">pita bread</a>
 													<!--end::Title-->
 
 												</div>
@@ -125,60 +123,33 @@
 
 												<div class="ms-5">
 													<!--begin::Title-->
-													<a href="" class="text-gray-800 text-hover-primary fs-5 fw-bold mb-1" data-kt-ecommerce-category-filter="category_name">{{$shop->company_address}}</a>
+
+													<a class="text-gray-800 text-hover-primary fs-5 fw-bold mb-1 badge badge-light-success " data-kt-ecommerce-category-filter="category_name">Alap anyag</a>
 													<!--end::Title-->
+
 
 												</div>
 											</div>
 										</td>
 										<!--end::Category=-->
 
-										<!--begin::Category=-->
+
 										<td>
 											<div class="d-flex">
 
 												<div class="ms-5">
 													<!--begin::Title-->
-													<a href="" class="text-gray-800 text-hover-primary fs-5 fw-bold mb-1" data-kt-ecommerce-category-filter="category_name">{{$shop->tax_number}}</a>
+													<a class="text-gray-800 text-hover-primary fs-5 fw-bold mb-1" data-kt-ecommerce-category-filter="category_name">Nov. 1, 2022</a>
 													<!--end::Title-->
 
 												</div>
 											</div>
 										</td>
 										<!--end::Category=-->
-										<!--begin::Category=-->
-										<td>
-											<div class="d-flex">
-
-												<div class="ms-5">
-													<!--begin::Title-->
-													<a href="" class="text-gray-800 text-hover-primary fs-5 fw-bold mb-1" data-kt-ecommerce-category-filter="category_name">{{$shop->shop_address}}</a>
-													<!--end::Title-->
-
-												</div>
-											</div>
-										</td>
-										<!--end::Category=-->
-										<!--begin::Category=-->
-										<td>
-											<div class="d-flex">
-
-												<div class="ms-5">
-													<!--begin::Title-->
-													<a href="" class="text-gray-800 text-hover-primary fs-5 fw-bold mb-1" data-kt-ecommerce-category-filter="category_name">{{$shop->created_at}}</a>
-													<!--end::Title-->
-
-												</div>
-											</div>
-										</td>
-										<!--end::Category=-->
-
-
-
 
 										<!--begin::Action=-->
 										<td class="text-end">
-											<a href="" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
+											<a class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
 												<!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
 												<span class="svg-icon svg-icon-5 m-0">
 													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -191,12 +162,12 @@
 											<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
 												<!--begin::Menu item-->
 												<div class="menu-item px-3">
-													<a href={{ url('shops/edit/' . $shop->id)}} class="btn ink-reaction btn-floating-action btn-success w-125px">Edit</a>
+													<a href="/expenses/update_bandexpense/1/" class="btn ink-reaction btn-floating-action btn-success w-125px">Edit</a>
 												</div>
 												<!--end::Menu item-->
 												<!--begin::Menu item-->
 												<div class="menu-item px-3">
-													<a href={{ url('shops/delete/' . $shop->id)}} class="btn ink-reaction btn-floating-action btn-danger w-125px" onclick="return confirm('Biztos törölni szeretnéd !!??')">Delete</a>
+													<a href="/expenses/delete_bandexpense/1/" class="btn ink-reaction btn-floating-action btn-danger w-125px" onclick="return confirm('Biztos törölni szeretnéd !!??')">Delete</a>
 												</div>
 												<!--end::Menu item-->
 											</div>
@@ -204,8 +175,6 @@
 										</td>
 										<!--end::Action=-->
 									</tr>
-
-									@endforeach
 								</tbody>
 								<!--end::Table body-->
 							</table>
@@ -241,5 +210,6 @@
 	</div>
 	<!--end::Content-->
 </div>
+
 
 @endsection

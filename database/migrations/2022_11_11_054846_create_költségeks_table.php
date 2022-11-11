@@ -13,13 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('shops', function (Blueprint $table) {
+        Schema::create('költségeks', function (Blueprint $table) {
             $table->id();
-            $table->string('shop_name' , 100);
-            $table->string('company_name' , 200);
-            $table->string('company_address' , 200);
-            $table->string('tax_number' , 200);
-            $table->string('shop_address' , 200);
             $table->timestamps();
         });
     }
@@ -31,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shops');
+        Schema::dropIfExists('költségeks');
     }
 };

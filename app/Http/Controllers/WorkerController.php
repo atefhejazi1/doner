@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace  App\Http\Controllers;
 
 use App\Models\Worker;
 use App\Http\Requests\StoreWorkerRequest;
 use App\Http\Requests\UpdateWorkerRequest;
+use Illuminate\Http\Request;
 
 class WorkerController extends Controller
 {
@@ -15,7 +16,8 @@ class WorkerController extends Controller
      */
     public function index()
     {
-        //
+        $workers = Worker::all();
+        return view('workers.allWorkers', compact('workers'));
     }
 
     /**
@@ -31,21 +33,31 @@ class WorkerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreWorkerRequest  $request
+     * @param  \App\Http\Requests\StoreworkerRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreWorkerRequest $request)
+    public function store(Request $request)
     {
-        //
+        // Validate the request...
+
+        $worker = new worker;
+
+        $worker->worker_name = $request->worker_name;
+        $worker->worker_phone = $request->worker_phone;
+        $worker->worker_address = $request->worker_address;
+        $worker->save();
+
+        return $request;
+        // return redirect('workers/all');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Worker  $worker
+     * @param  \App\Models\worker  $worker
      * @return \Illuminate\Http\Response
      */
-    public function show(Worker $worker)
+    public function show(worker $worker)
     {
         //
     }
@@ -53,34 +65,47 @@ class WorkerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Worker  $worker
+     * @param  \App\Models\worker  $worker
      * @return \Illuminate\Http\Response
      */
-    public function edit(Worker $worker)
+    public function edit($id)
     {
-        //
+        $cItem = worker::find($id);
+
+        return view('workers.editworker', compact('cItem'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateWorkerRequest  $request
-     * @param  \App\Models\Worker  $worker
+     * @param  \App\Http\Requests\UpdateworkerRequest  $request
+     * @param  \App\Models\worker  $worker
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateWorkerRequest $request, Worker $worker)
+    public function update(Request $request)
     {
-        //
+        worker::where('id', $request->id)
+            ->update(
+                [
+                    'worker_name' => $request->worker_name,
+                    'worker_phone' => $request->worker_phone,
+                    'worker_address' => $request->worker_address
+                ],
+            );
+        return redirect('worker/allworkers');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Worker  $worker
+     * @param  \App\Models\worker  $worker
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Worker $worker)
+    public function destroy($id)
     {
-        //
+        $worker = worker::find($id);
+
+        $worker->delete();
+        return redirect('worker/allworkers');
     }
 }

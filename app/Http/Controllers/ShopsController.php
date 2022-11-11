@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\shops;
-use App\Http\Requests\StoreshopsRequest;
-use App\Http\Requests\UpdateshopsRequest;
+use Illuminate\Http\Request;
 
 class ShopsController extends Controller
 {
@@ -15,8 +14,8 @@ class ShopsController extends Controller
      */
     public function index()
     {
-        //
-        return view('shops.allShops');
+        $shops = shops::all();
+        return view('shops.allShops', compact('shops'));
     }
 
     /**
@@ -32,21 +31,31 @@ class ShopsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreshopsRequest  $request
+     * @param  \App\Http\Requests\StoreshopRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreshopsRequest $request)
+    public function store(Request $request)
     {
-        //
+        // Validate the request...
+
+        $shop = new shops;
+
+        $shop->shop_name = $request->shop_name;
+        $shop->company_name = $request->company_name;
+        $shop->company_address = $request->company_address;
+        $shop->tax_number = $request->tax_number;
+        $shop->shop_address = $request->shop_address;
+        $shop->save();
+        return redirect('shops/all');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\shops  $shops
+     * @param  \App\Models\shop  $shop
      * @return \Illuminate\Http\Response
      */
-    public function show(shops $shops)
+    public function show(shops $shop)
     {
         //
     }
@@ -54,34 +63,49 @@ class ShopsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\shops  $shops
+     * @param  \App\Models\shop  $shop
      * @return \Illuminate\Http\Response
      */
-    public function edit(shops $shops)
+    public function edit($id)
     {
-        //
+        $shop = shops::find($id);
+
+        return view('shops.editShop', compact('shop'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateshopsRequest  $request
-     * @param  \App\Models\shops  $shops
+     * @param  \App\Http\Requests\UpdateshopRequest  $request
+     * @param  \App\Models\shop  $shop
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateshopsRequest $request, shops $shops)
+    public function update(Request $request)
     {
-        //
+        shops::where('id', $request->id)
+            ->update(
+                [
+                    'shop_name' => $request->shop_name,
+                    'company_name' => $request->company_name,
+                    'company_address' => $request->company_address,
+                    'tax_number' => $request->tax_number,
+                    'shop_address' => $request->shop_address,
+                ],
+            );
+        return redirect('shops/all');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\shops  $shops
+     * @param  \App\Models\shop  $shop
      * @return \Illuminate\Http\Response
      */
-    public function destroy(shops $shops)
+    public function destroy($id)
     {
-        //
+        $shop = shops::find($id);
+
+        $shop->delete();
+        return redirect('shops/all');
     }
 }

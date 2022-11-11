@@ -1,10 +1,9 @@
 @extends('layouts/main-dashboard')
 
 
-@section('title', 'Új Alkalmazott')
+@section('title', '+Új Költség')
 @section('app-main')
-
-<div class="d-flex flex-column flex-column-fluid">
+<div class="d-flex flex-column flex-column-fluid __web-inspector-hide-shortcut__">
 
 
 
@@ -18,13 +17,13 @@
 				<!--begin::Page title-->
 				<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
 					<!--begin::Title-->
-					<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Új Alkalmazott</h1>
+					<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">+Új Költség </h1>
 					<!--end::Title-->
 					<!--begin::Breadcrumb-->
 					<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
 						<!--begin::Item-->
 						<li class="breadcrumb-item text-muted">
-							<a href="/" class="text-muted text-hover-primary">Workers</a>
+							<a href="/" class="text-muted text-hover-primary">Költségek</a>
 						</li>
 						<!--end::Item-->
 						<!--begin::Item-->
@@ -33,7 +32,7 @@
 						</li>
 						<!--end::Item-->
 						<!--begin::Item-->
-						<li class="breadcrumb-item text-muted">Új Alkalmazott</li>
+						<li class="breadcrumb-item text-muted">+Új Költség </li>
 						<!--end::Item-->
 					</ul>
 					<!--end::Breadcrumb-->
@@ -43,7 +42,7 @@
 				<div class="d-flex align-items-center gap-2 gap-lg-3">
 
 					<!--begin::Primary button-->
-					<a href="/" class="btn btn-sm fw-bold btn-primary">Workers</a>
+					<a href="/expenses/bandexpenses/" class="btn btn-sm fw-bold btn-primary">Költségek</a>
 					<!--end::Primary button-->
 				</div>
 				<!--end::Actions-->
@@ -59,22 +58,22 @@
 					<div class="card-body">
 						<!--begin::Row-->
 						<div class="row g-5 g-xl-10 mb-xl-10">
-							<form id="kt_ecommerce_settings_general_form" class="form" action="{{ url('worker/store')}}" method="post" role="form"> <input type="hidden" name="csrfmiddlewaretoken" value="HScR7E7xbWk5O2pjljRKYd7jWIbgScaDo568tuxAara5ueiYmHrRVzHHebzVVFz2">
-								@csrf()
+							<form id="kt_ecommerce_settings_general_form" class="form" action="" method="post" role="form"> <input type="hidden" name="csrfmiddlewaretoken" value="ETz0Pvk8FWRk8noHS67Chq67ANXAFbkRl6thblKbErHkOzhmTuHJeMGvSglfIEJg">
+
 								<!--begin::Input group-->
 								<div class="row fv-row mb-7">
 									<div class="col-md-3 text-md-end">
 										<!--begin::Label-->
 										<label class="fs-6 fw-semibold form-label mt-3">
-											<span class="required">Worker Name</span>
-											<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" aria-label="Set the Worker Name." data-bs-original-title="Set the Worker Name." data-kt-initialized="1"></i>
+											<span class="required"> Name/Költség</span>
+
 										</label>
 										<!--end::Label-->
 									</div>
 									<div class="col-md-9">
 										<!--begin::Input-->
 
-										<input type="text" name="worker_name" maxlength="200" class="form-control form-control-solid" required="" id="id_name">
+										<input type="text" name="name" maxlength="200" class="form-control form-control-solid" required="" id="id_name">
 										<!--end::Input-->
 									</div>
 								</div>
@@ -85,35 +84,48 @@
 									<div class="col-md-3 text-md-end">
 										<!--begin::Label-->
 										<label class="fs-6 fw-semibold form-label mt-3">
-											<span class="required">Phone</span>
+											<span class="required">Description/Megjegyzés</span>
+
 										</label>
 										<!--end::Label-->
 									</div>
 									<div class="col-md-9">
 										<!--begin::Input-->
-										<input type="text" name="worker_phone" value="+36" maxlength="17" class="form-control form-control-solid" id="id_phone">
+
+										<input type="text" name="description" maxlength="200" class="form-control form-control-solid" id="id_description">
 										<!--end::Input-->
 									</div>
 								</div>
 								<!--end::Input group-->
-
 								<!--begin::Input group-->
 								<div class="row fv-row mb-7">
 									<div class="col-md-3 text-md-end">
 										<!--begin::Label-->
 										<label class="fs-6 fw-semibold form-label mt-3">
-											<span class="required">Address</span>
-											<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" aria-label="Set the store's full address." data-bs-original-title="Set the store's full address." data-kt-initialized="1"></i>
+											<span class="required">Type/Költség típus</span>
+
 										</label>
 										<!--end::Label-->
 									</div>
 									<div class="col-md-9">
 										<!--begin::Input-->
-										<textarea name="worker_address" cols="40" rows="10" class="form-control form-control-solid textarea" required="" id="id_address"> </textarea>
+
+
+										<label class="form-check form-check-custom form-check-solid form-check-success flex-shrink-0 me-6">
+											<label for="id_expense_status_0"><input type="radio" name="expense_status" value="primary" id="id_expense_status_0">
+												Alap anyag</label>
+										</label>
+
+										<label class="form-check form-check-custom form-check-solid form-check-success flex-shrink-0 me-6">
+											<label for="id_expense_status_1"><input type="radio" name="expense_status" value="secondary" id="id_expense_status_1">
+												Egyéb</label>
+										</label>
+
 										<!--end::Input-->
 									</div>
 								</div>
 								<!--end::Input group-->
+
 
 								<!--begin::Action buttons-->
 								<div class="row py-5">
@@ -162,5 +174,4 @@
 		<!--end::Footer container-->
 	</div>
 </div>
-
 @endsection

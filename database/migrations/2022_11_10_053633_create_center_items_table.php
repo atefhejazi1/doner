@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('center_items', function (Blueprint $table) {
             $table->id();
+            $table->string('name' , 200);
+            $table->string('description' , 200);
+            $table->string('type' , 200);
             $table->timestamps();
         });
     }

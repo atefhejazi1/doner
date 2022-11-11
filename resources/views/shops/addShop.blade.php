@@ -58,7 +58,8 @@
 					<div class="card-body">
 						<!--begin::Row-->
 						<div class="row g-5 g-xl-10 mb-xl-10">
-							<form id="kt_ecommerce_settings_general_form" class="form" action="" method="post" role="form"> <input type="hidden" name="csrfmiddlewaretoken" value="i0PObtfztVq7nBS0icNvgwKjtjRw2l9oZdJ5xjFCsqg73NLFjAnCdSkHLMfb5OyN">
+							<form id="kt_ecommerce_settings_general_form" class="form" action="{{ url('shops/store') }}" method="post" role="form"> <input type="hidden" name="csrfmiddlewaretoken" value="i0PObtfztVq7nBS0icNvgwKjtjRw2l9oZdJ5xjFCsqg73NLFjAnCdSkHLMfb5OyN">
+								@csrf()
 
 								<!--begin::Input group-->
 								<div class="row fv-row mb-7">

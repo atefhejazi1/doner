@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CenterItem;
 use App\Http\Requests\StoreCenterItemRequest;
 use App\Http\Requests\UpdateCenterItemRequest;
+use Illuminate\Http\Request;
 
 class CenterItemController extends Controller
 {
@@ -15,7 +16,8 @@ class CenterItemController extends Controller
      */
     public function index()
     {
-        return view('centerItems.centerItems');
+        $centerItems = CenterItem::all();
+        return view('centerItems.centerItems', compact('centerItems'));
     }
 
     /**
@@ -34,9 +36,17 @@ class CenterItemController extends Controller
      * @param  \App\Http\Requests\StoreCenterItemRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCenterItemRequest $request)
+    public function store(Request $request)
     {
-        //
+        // Validate the request...
+
+        $centerItem = new CenterItem;
+
+        $centerItem->name = $request->name;
+        $centerItem->description = $request->description;
+        $centerItem->type = $request->type;
+        $centerItem->save();
+        return redirect('centerItem/allCenterItems');
     }
 
     /**
@@ -56,9 +66,11 @@ class CenterItemController extends Controller
      * @param  \App\Models\CenterItem  $centerItem
      * @return \Illuminate\Http\Response
      */
-    public function edit(CenterItem $centerItem)
+    public function edit($id)
     {
-        //
+        $cItem = CenterItem::find($id);
+
+        return view('centerItems.editCenterItem', compact('cItem'));
     }
 
     /**
@@ -68,9 +80,17 @@ class CenterItemController extends Controller
      * @param  \App\Models\CenterItem  $centerItem
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCenterItemRequest $request, CenterItem $centerItem)
+    public function update(Request $request)
     {
-        //
+        CenterItem::where('id', $request->id)
+            ->update(
+                [
+                    'name' => $request->name,
+                    'description' => $request->description,
+                    'type' => $request->type
+                ],
+            );
+        return redirect('centerItem/allCenterItems');
     }
 
     /**
@@ -79,8 +99,11 @@ class CenterItemController extends Controller
      * @param  \App\Models\CenterItem  $centerItem
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CenterItem $centerItem)
+    public function destroy($id)
     {
-        //
+        $centerItem = CenterItem::find($id);
+
+        $centerItem->delete();
+        return redirect('centerItem/allCenterItems');
     }
 }

@@ -1,9 +1,8 @@
 @extends('layouts/main-dashboard')
 
 
-@section('title', 'Új Alkalmazott')
+@section('title', 'Jávitási')
 @section('app-main')
-
 <div class="d-flex flex-column flex-column-fluid">
 
 
@@ -18,13 +17,13 @@
 				<!--begin::Page title-->
 				<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
 					<!--begin::Title-->
-					<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Új Alkalmazott</h1>
+					<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Új Vevő</h1>
 					<!--end::Title-->
 					<!--begin::Breadcrumb-->
 					<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
 						<!--begin::Item-->
 						<li class="breadcrumb-item text-muted">
-							<a href="/" class="text-muted text-hover-primary">Workers</a>
+							<a href="/" class="text-muted text-hover-primary">Shops</a>
 						</li>
 						<!--end::Item-->
 						<!--begin::Item-->
@@ -33,7 +32,7 @@
 						</li>
 						<!--end::Item-->
 						<!--begin::Item-->
-						<li class="breadcrumb-item text-muted">Új Alkalmazott</li>
+						<li class="breadcrumb-item text-muted">Új Vevő</li>
 						<!--end::Item-->
 					</ul>
 					<!--end::Breadcrumb-->
@@ -43,7 +42,7 @@
 				<div class="d-flex align-items-center gap-2 gap-lg-3">
 
 					<!--begin::Primary button-->
-					<a href="/" class="btn btn-sm fw-bold btn-primary">Workers</a>
+					<a href="/shops/" class="btn btn-sm fw-bold btn-primary">Shops</a>
 					<!--end::Primary button-->
 				</div>
 				<!--end::Actions-->
@@ -59,22 +58,24 @@
 					<div class="card-body">
 						<!--begin::Row-->
 						<div class="row g-5 g-xl-10 mb-xl-10">
-							<form id="kt_ecommerce_settings_general_form" class="form" action="{{ url('worker/store')}}" method="post" role="form"> <input type="hidden" name="csrfmiddlewaretoken" value="HScR7E7xbWk5O2pjljRKYd7jWIbgScaDo568tuxAara5ueiYmHrRVzHHebzVVFz2">
+							<form id="kt_ecommerce_settings_general_form" class="form" action="{{ url('shops/update') }}" method="post" role="form"> <input type="hidden" name="csrfmiddlewaretoken" value="i0PObtfztVq7nBS0icNvgwKjtjRw2l9oZdJ5xjFCsqg73NLFjAnCdSkHLMfb5OyN">
 								@csrf()
+								<input type="hidden" value={{ $shop->id }}>
+
 								<!--begin::Input group-->
 								<div class="row fv-row mb-7">
 									<div class="col-md-3 text-md-end">
 										<!--begin::Label-->
 										<label class="fs-6 fw-semibold form-label mt-3">
-											<span class="required">Worker Name</span>
-											<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" aria-label="Set the Worker Name." data-bs-original-title="Set the Worker Name." data-kt-initialized="1"></i>
+											<span class="required">Shop Name/Név</span>
+
 										</label>
 										<!--end::Label-->
 									</div>
 									<div class="col-md-9">
 										<!--begin::Input-->
 
-										<input type="text" name="worker_name" maxlength="200" class="form-control form-control-solid" required="" id="id_name">
+										<input type="text" name="shop_name" value={{ $shop->shop_name }} maxlength="100" class="form-control form-control-solid" required="" id="id_shop_name">
 										<!--end::Input-->
 									</div>
 								</div>
@@ -85,13 +86,33 @@
 									<div class="col-md-3 text-md-end">
 										<!--begin::Label-->
 										<label class="fs-6 fw-semibold form-label mt-3">
-											<span class="required">Phone</span>
+											<span class="required">Company Name/Cégnév</span>
+
 										</label>
 										<!--end::Label-->
 									</div>
 									<div class="col-md-9">
 										<!--begin::Input-->
-										<input type="text" name="worker_phone" value="+36" maxlength="17" class="form-control form-control-solid" id="id_phone">
+
+										<input type="text" name="company_name" value={{ $shop->company_name }} maxlength="200" class="form-control form-control-solid" id="id_company_name">
+										<!--end::Input-->
+									</div>
+								</div>
+								<!--end::Input group-->
+								<!--begin::Input group-->
+								<div class="row fv-row mb-7">
+									<div class="col-md-3 text-md-end">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold form-label mt-3">
+											<span class="required">Company Place/Székhely</span>
+
+										</label>
+										<!--end::Label-->
+									</div>
+									<div class="col-md-9">
+										<!--begin::Input-->
+
+										<input type="text" name="company_address" value={{ $shop->company_address }} maxlength="200" class="form-control form-control-solid" required="" id="id_company_address">
 										<!--end::Input-->
 									</div>
 								</div>
@@ -102,14 +123,33 @@
 									<div class="col-md-3 text-md-end">
 										<!--begin::Label-->
 										<label class="fs-6 fw-semibold form-label mt-3">
-											<span class="required">Address</span>
-											<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" aria-label="Set the store's full address." data-bs-original-title="Set the store's full address." data-kt-initialized="1"></i>
+											<span class="required">Tax ID/Adó szám</span>
+
 										</label>
 										<!--end::Label-->
 									</div>
 									<div class="col-md-9">
 										<!--begin::Input-->
-										<textarea name="worker_address" cols="40" rows="10" class="form-control form-control-solid textarea" required="" id="id_address"> </textarea>
+
+										<input type="text" name="tax_number" value={{ $shop->tax_number }} maxlength="200" class="form-control form-control-lg form-control-solid" required="" id="id_tax_number">
+										<!--end::Input-->
+									</div>
+								</div>
+								<!--end::Input group-->
+								<!--begin::Input group-->
+								<div class="row fv-row mb-7">
+									<div class="col-md-3 text-md-end">
+										<!--begin::Label-->
+										<label class="fs-6 fw-semibold form-label mt-3">
+											<span class="required">Shop Address/Szállítási cím</span>
+
+										</label>
+										<!--end::Label-->
+									</div>
+									<div class="col-md-9">
+										<!--begin::Input-->
+
+										<input type="text" name="shop_address" value={{ $shop->shop_address }} maxlength="200" class="form-control form-control-solid" required="" id="id_shop_address">
 										<!--end::Input-->
 									</div>
 								</div>
@@ -162,5 +202,4 @@
 		<!--end::Footer container-->
 	</div>
 </div>
-
 @endsection

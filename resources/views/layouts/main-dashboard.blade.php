@@ -465,7 +465,7 @@ License: For each use you must have a valid license purchased only from above li
                                     <!--begin:Menu item-->
                                     <div class="menu-item">
                                         <!--begin:Menu link-->
-                                        <a class="menu-link" href="../../demo1/dist/pages/user-profile/projects.html">
+                                        <a class="menu-link" href="{{url('worker/all')}}">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
@@ -527,7 +527,7 @@ License: For each use you must have a valid license purchased only from above li
                                     </div>
                                     <div class="menu-item">
                                         <!--begin:Menu link-->
-                                        <a class="menu-link" href="../../demo1/dist/pages/user-profile/projects.html">
+                                        <a class="menu-link" href="{{ url('koltsegek/add')}}">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
@@ -538,7 +538,7 @@ License: For each use you must have a valid license purchased only from above li
                                     </div>
                                     <div class="menu-item">
                                         <!--begin:Menu link-->
-                                        <a class="menu-link" href="../../demo1/dist/pages/user-profile/projects.html">
+                                        <a class="menu-link" href="{{ url('koltsegek/all')}}">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>

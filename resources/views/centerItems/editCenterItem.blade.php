@@ -1,7 +1,7 @@
 @extends('layouts/main-dashboard')
 
 
-@section('title', 'Új Alkalmazott')
+@section('title', '+Új CenterItem')
 @section('app-main')
 
 <div class="d-flex flex-column flex-column-fluid">
@@ -18,13 +18,13 @@
 				<!--begin::Page title-->
 				<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
 					<!--begin::Title-->
-					<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Új Alkalmazott</h1>
+					<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">+Új CenterItem </h1>
 					<!--end::Title-->
 					<!--begin::Breadcrumb-->
 					<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
 						<!--begin::Item-->
 						<li class="breadcrumb-item text-muted">
-							<a href="/" class="text-muted text-hover-primary">Workers</a>
+							<a href="/" class="text-muted text-hover-primary">CenterItem</a>
 						</li>
 						<!--end::Item-->
 						<!--begin::Item-->
@@ -33,7 +33,7 @@
 						</li>
 						<!--end::Item-->
 						<!--begin::Item-->
-						<li class="breadcrumb-item text-muted">Új Alkalmazott</li>
+						<li class="breadcrumb-item text-muted">+Új CenterItem </li>
 						<!--end::Item-->
 					</ul>
 					<!--end::Breadcrumb-->
@@ -43,7 +43,7 @@
 				<div class="d-flex align-items-center gap-2 gap-lg-3">
 
 					<!--begin::Primary button-->
-					<a href="/" class="btn btn-sm fw-bold btn-primary">Workers</a>
+					<a href="/center/bandcenter/" class="btn btn-sm fw-bold btn-primary">CenterItem</a>
 					<!--end::Primary button-->
 				</div>
 				<!--end::Actions-->
@@ -59,22 +59,24 @@
 					<div class="card-body">
 						<!--begin::Row-->
 						<div class="row g-5 g-xl-10 mb-xl-10">
-							<form id="kt_ecommerce_settings_general_form" class="form" action="{{ url('worker/store')}}" method="post" role="form"> <input type="hidden" name="csrfmiddlewaretoken" value="HScR7E7xbWk5O2pjljRKYd7jWIbgScaDo568tuxAara5ueiYmHrRVzHHebzVVFz2">
+							<form id="kt_ecommerce_settings_general_form" class="form" action="{{ url('centerItem/update') }}" method="post" role="form">
 								@csrf()
+								<input type="hidden" name="id" value="{{$cItem->id}}">
+
 								<!--begin::Input group-->
 								<div class="row fv-row mb-7">
 									<div class="col-md-3 text-md-end">
 										<!--begin::Label-->
 										<label class="fs-6 fw-semibold form-label mt-3">
-											<span class="required">Worker Name</span>
-											<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" aria-label="Set the Worker Name." data-bs-original-title="Set the Worker Name." data-kt-initialized="1"></i>
+											<span class="required"> Name/Nev</span>
+
 										</label>
 										<!--end::Label-->
 									</div>
 									<div class="col-md-9">
 										<!--begin::Input-->
 
-										<input type="text" name="worker_name" maxlength="200" class="form-control form-control-solid" required="" id="id_name">
+										<input type="text" name="name"  value="{{$cItem->name}}" maxlength="200" class="form-control form-control-solid" required="" id="id_name">
 										<!--end::Input-->
 									</div>
 								</div>
@@ -85,35 +87,38 @@
 									<div class="col-md-3 text-md-end">
 										<!--begin::Label-->
 										<label class="fs-6 fw-semibold form-label mt-3">
-											<span class="required">Phone</span>
+											<span class="required">Description/Megjegyzés</span>
+
 										</label>
 										<!--end::Label-->
 									</div>
 									<div class="col-md-9">
 										<!--begin::Input-->
-										<input type="text" name="worker_phone" value="+36" maxlength="17" class="form-control form-control-solid" id="id_phone">
+
+										<input type="text" name="description" value="{{$cItem->description}}" maxlength="200" class="form-control form-control-solid" id="id_description">
 										<!--end::Input-->
 									</div>
 								</div>
 								<!--end::Input group-->
-
 								<!--begin::Input group-->
 								<div class="row fv-row mb-7">
 									<div class="col-md-3 text-md-end">
 										<!--begin::Label-->
 										<label class="fs-6 fw-semibold form-label mt-3">
-											<span class="required">Address</span>
-											<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" aria-label="Set the store's full address." data-bs-original-title="Set the store's full address." data-kt-initialized="1"></i>
+											<span class="required">Type/Költség típus</span>
+
 										</label>
 										<!--end::Label-->
 									</div>
 									<div class="col-md-9">
 										<!--begin::Input-->
-										<textarea name="worker_address" cols="40" rows="10" class="form-control form-control-solid textarea" required="" id="id_address"> </textarea>
+
+										<input type="text" name="type"value="{{$cItem->type}}" maxlength="200" class="form-control form-control-solid" id="id_type">
 										<!--end::Input-->
 									</div>
 								</div>
 								<!--end::Input group-->
+
 
 								<!--begin::Action buttons-->
 								<div class="row py-5">
@@ -162,5 +167,4 @@
 		<!--end::Footer container-->
 	</div>
 </div>
-
 @endsection
