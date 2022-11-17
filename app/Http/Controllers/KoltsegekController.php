@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Költségek;
 use Illuminate\Http\Request;
 
 class KoltsegekController extends Controller
@@ -13,7 +14,8 @@ class KoltsegekController extends Controller
      */
     public function index()
     {
-        return view('Koltsegek.allKoltsegek');
+        $koltsegeks = Költségek::all();
+        return view('Koltsegek.allKoltsegek', compact('koltsegeks'));
     }
 
     /**
@@ -35,7 +37,13 @@ class KoltsegekController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $költségek = new Költségek;
+
+        $költségek->name = $request->name;
+        $költségek->description = $request->description;
+        $költségek->expense_status = $request->expense_status;
+        $költségek->save();
+        return redirect('koltsegek/all')->with('success', 'Elküldve.');;
     }
 
     /**
@@ -57,7 +65,9 @@ class KoltsegekController extends Controller
      */
     public function edit($id)
     {
-        //
+        $koltsegek = Költségek::find($id);
+
+        return view('Koltsegek.editKoltsegek', compact('koltsegek'));
     }
 
     /**
@@ -67,9 +77,18 @@ class KoltsegekController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        Költségek::where('id', $request->id)
+            ->update(
+                [
+                    'name' => $request->name,
+                    'description' => $request->description,
+                    'expense_status' => $request->expense_status
+                ],
+            );
+            
+        return redirect('koltsegek/all');
     }
 
     /**
@@ -80,6 +99,9 @@ class KoltsegekController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $koltsegek = Költségek::find($id);
+
+        $koltsegek->delete();
+        return redirect('koltsegek/all');
     }
 }

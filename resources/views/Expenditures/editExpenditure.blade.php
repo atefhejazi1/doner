@@ -1,9 +1,9 @@
 @extends('layouts/main-dashboard')
 
 
-@section('title', '+Új Költség')
+@section('title', 'Kiadás')
 @section('app-main')
-<div class="d-flex flex-column flex-column-fluid __web-inspector-hide-shortcut__">
+<div class="d-flex flex-column flex-column-fluid">
 
 
 
@@ -17,13 +17,13 @@
 				<!--begin::Page title-->
 				<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
 					<!--begin::Title-->
-					<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">+Új Költség </h1>
+					<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Kiadás</h1>
 					<!--end::Title-->
 					<!--begin::Breadcrumb-->
 					<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
 						<!--begin::Item-->
 						<li class="breadcrumb-item text-muted">
-							<a href="/" class="text-muted text-hover-primary">Költségek</a>
+							<a href="/expenses/expenses/" class="text-muted text-hover-primary">Kiadások</a>
 						</li>
 						<!--end::Item-->
 						<!--begin::Item-->
@@ -32,7 +32,7 @@
 						</li>
 						<!--end::Item-->
 						<!--begin::Item-->
-						<li class="breadcrumb-item text-muted">+Új Költség </li>
+						<li class="breadcrumb-item text-muted">Kiadás</li>
 						<!--end::Item-->
 					</ul>
 					<!--end::Breadcrumb-->
@@ -42,7 +42,7 @@
 				<div class="d-flex align-items-center gap-2 gap-lg-3">
 
 					<!--begin::Primary button-->
-					<a href="/expenses/bandexpenses/" class="btn btn-sm fw-bold btn-primary">Költségek</a>
+					<a href="/expenses/expenses/" class="btn btn-sm fw-bold btn-primary">Kiadások</a>
 					<!--end::Primary button-->
 				</div>
 				<!--end::Actions-->
@@ -58,14 +58,15 @@
 					<div class="card-body">
 						<!--begin::Row-->
 						<div class="row g-5 g-xl-10 mb-xl-10">
-							<form id="kt_ecommerce_settings_general_form" class="form" action="{{ url('koltsegek/store')}}" method="post" role="form"> <input type="hidden" name="csrfmiddlewaretoken" value="ETz0Pvk8FWRk8noHS67Chq67ANXAFbkRl6thblKbErHkOzhmTuHJeMGvSglfIEJg">
+							<form id="kt_ecommerce_settings_general_form" class="form" action="{{url('expenditures/update')}}" method="post" role="form"> <input type="hidden" name="csrfmiddlewaretoken" value="2QhVcoV4KcGdjKwvSemZi40DwgEM5z8nJ3bcyel7JHwdZWpaTCW6fqA1OJ2r82xM">
 								@csrf()
+								<input type="hidden" name="id"  value="{{$expenditure->id}}">
 								<!--begin::Input group-->
 								<div class="row fv-row mb-7">
 									<div class="col-md-3 text-md-end">
 										<!--begin::Label-->
 										<label class="fs-6 fw-semibold form-label mt-3">
-											<span class="required"> Name/Költség</span>
+											<span class="required">Enter Date</span>
 
 										</label>
 										<!--end::Label-->
@@ -73,7 +74,7 @@
 									<div class="col-md-9">
 										<!--begin::Input-->
 
-										<input type="text" name="name" maxlength="200" class="form-control form-control-solid" required="" id="id_name">
+										<input type="date" name="date"  value="{{$expenditure->date}}" class="form-control form-control-solid" required="" id="id_date">
 										<!--end::Input-->
 									</div>
 								</div>
@@ -84,15 +85,20 @@
 									<div class="col-md-3 text-md-end">
 										<!--begin::Label-->
 										<label class="fs-6 fw-semibold form-label mt-3">
-											<span class="required">Description/Megjegyzés</span>
-
+											<span class="required">Kiadás választás</span>
 										</label>
 										<!--end::Label-->
 									</div>
 									<div class="col-md-9">
 										<!--begin::Input-->
 
-										<input type="text" name="description" maxlength="200" class="form-control form-control-solid" id="id_description">
+										<select name="id_költségek" class="form-control form-control-solid" required="" id="id_bandexpense">
+											<option value="{{ $expenditure->költségeks->id }}" selected="">{{ $expenditure->költségeks->name }}</option>
+											@foreach($koltsegeks as $koltsegek)
+											<option value="{{$koltsegek->id}}">{{$koltsegek->name}}</option>
+											@endforeach
+
+										</select>
 										<!--end::Input-->
 									</div>
 								</div>
@@ -102,7 +108,7 @@
 									<div class="col-md-3 text-md-end">
 										<!--begin::Label-->
 										<label class="fs-6 fw-semibold form-label mt-3">
-											<span class="required">Type/Költség típus</span>
+											<span class="required">Kiadás választás</span>
 
 										</label>
 										<!--end::Label-->
@@ -110,21 +116,12 @@
 									<div class="col-md-9">
 										<!--begin::Input-->
 
-
-										<label class="form-check form-check-custom form-check-solid form-check-success flex-shrink-0 me-6">
-											<label for="id_expense_status_0"><input type="radio" name="expense_status" value="Alap anyag" id="id_expense_status_0">
-												Alap anyag</label>
-										</label>
-
-										<label class="form-check form-check-custom form-check-solid form-check-success flex-shrink-0 me-6">
-											<label for="id_expense_status_1"><input type="radio" name="expense_status" value="Egyéb" checked id="id_expense_status_1">
-												Egyéb</label>
-										</label>
-
+										<input type="number" name="amount" value="{{$expenditure->amount}}" class="form-control form-control-solid" required="" id="id_amount">
 										<!--end::Input-->
 									</div>
 								</div>
 								<!--end::Input group-->
+
 
 
 								<!--begin::Action buttons-->

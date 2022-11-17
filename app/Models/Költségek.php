@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Költségek extends Model
 {
     use HasFactory;
+
+    protected $table = "költségeks";
+
+    public function expenditures()
+    {
+        return $this->hasMany(Expenditure::class);
+    }
 }

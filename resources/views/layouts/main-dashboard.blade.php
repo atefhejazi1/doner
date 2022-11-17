@@ -287,7 +287,10 @@ License: For each use you must have a valid license purchased only from above li
 
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-5">
-                                    <a href="../../demo1/dist/authentication/layouts/corporate/sign-in.html" class="menu-link px-5">Sign Out</a>
+                                    <form action="{{url('logout')}}" method="POST">
+                                        @csrf()
+                                        <button type="submit" class="menu-link px-5 border-0 w-100 bg-transparent">Sign Out</button>
+                                    </form>
                                 </div>
                                 <!--end::Menu item-->
                             </div>

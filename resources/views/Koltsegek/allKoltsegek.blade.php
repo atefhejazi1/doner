@@ -3,7 +3,11 @@
 
 @section('title', 'Kiadások')
 @section('app-main')
-
+@if (Session::has('success'))
+    <div class="alert alert-success">
+            <li>{!! \Session::get('success') !!}</li>
+    </div>
+@endif
 <div class="d-flex flex-column flex-column-fluid">
 	<!--begin::Toolbar-->
 	<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
@@ -54,7 +58,7 @@
 					<!--begin::Card toolbar-->
 					<div class="card-toolbar">
 						<!--begin::Add customer-->
-						<a href="/expenses/addbandexpenses/" class="btn btn-primary">Új Költsé</a>
+						<a href="{{url('koltsegek/add')}}" class="btn btn-primary">Új Költsé</a>
 						<!--end::Add customer-->
 					</div>
 					<!--end::Card toolbar-->
@@ -87,7 +91,7 @@
 									<!--end::Table row-->
 
 
-
+									@foreach($koltsegeks as $koltsegek)
 									<tr class="odd">
 
 										<!--begin::Category=-->
@@ -96,7 +100,7 @@
 
 												<div class="ms-5">
 													<!--begin::Title-->
-													<a class="text-gray-800 text-hover-primary fs-5 fw-bold mb-1" data-kt-ecommerce-category-filter="category_name">pita</a>
+													<a class="text-gray-800 text-hover-primary fs-5 fw-bold mb-1" data-kt-ecommerce-category-filter="category_name">{{ $koltsegek->name}}</a>
 													<!--end::Title-->
 
 												</div>
@@ -110,7 +114,7 @@
 
 												<div class="ms-5">
 													<!--begin::Title-->
-													<a class="text-gray-800 text-hover-primary fs-5 fw-bold mb-1" data-kt-ecommerce-category-filter="category_name">pita bread</a>
+													<a class="text-gray-800 text-hover-primary fs-5 fw-bold mb-1" data-kt-ecommerce-category-filter="category_name">{{ $koltsegek->description}}</a>
 													<!--end::Title-->
 
 												</div>
@@ -124,7 +128,7 @@
 												<div class="ms-5">
 													<!--begin::Title-->
 
-													<a class="text-gray-800 text-hover-primary fs-5 fw-bold mb-1 badge badge-light-success " data-kt-ecommerce-category-filter="category_name">Alap anyag</a>
+													<a class="text-gray-800 text-hover-primary fs-5 fw-bold mb-1 badge badge-light-success " data-kt-ecommerce-category-filter="category_name">{{ $koltsegek->expense_status}}</a>
 													<!--end::Title-->
 
 
@@ -139,7 +143,7 @@
 
 												<div class="ms-5">
 													<!--begin::Title-->
-													<a class="text-gray-800 text-hover-primary fs-5 fw-bold mb-1" data-kt-ecommerce-category-filter="category_name">Nov. 1, 2022</a>
+													<a class="text-gray-800 text-hover-primary fs-5 fw-bold mb-1" data-kt-ecommerce-category-filter="category_name">{{ $koltsegek->created_at}}</a>
 													<!--end::Title-->
 
 												</div>
@@ -162,12 +166,12 @@
 											<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
 												<!--begin::Menu item-->
 												<div class="menu-item px-3">
-													<a href="/expenses/update_bandexpense/1/" class="btn ink-reaction btn-floating-action btn-success w-125px">Edit</a>
+													<a href={{ url('koltsegek/edit/' . $koltsegek->id)}} class="btn ink-reaction btn-floating-action btn-success w-125px">Edit</a>
 												</div>
 												<!--end::Menu item-->
 												<!--begin::Menu item-->
 												<div class="menu-item px-3">
-													<a href="/expenses/delete_bandexpense/1/" class="btn ink-reaction btn-floating-action btn-danger w-125px" onclick="return confirm('Biztos törölni szeretnéd !!??')">Delete</a>
+													<a href={{url('koltsegek/delete/' .  $koltsegek->id)}} class="btn ink-reaction btn-floating-action btn-danger w-125px" onclick="return confirm('Biztos törölni szeretnéd !!??')">Delete</a>
 												</div>
 												<!--end::Menu item-->
 											</div>
@@ -175,6 +179,7 @@
 										</td>
 										<!--end::Action=-->
 									</tr>
+									@endforeach
 								</tbody>
 								<!--end::Table body-->
 							</table>

@@ -46,7 +46,7 @@ class CenterItemController extends Controller
         $centerItem->description = $request->description;
         $centerItem->type = $request->type;
         $centerItem->save();
-        return redirect('centerItem/allCenterItems');
+        return redirect('centerItem/allCenterItems')->with('success', 'Elküldve.');;
     }
 
     /**

@@ -3,7 +3,11 @@
 
 @section('title', 'Shops')
 @section('app-main')
-
+@if (Session::has('success'))
+    <div class="alert alert-success">
+            <li>{!! \Session::get('success') !!}</li>
+    </div>
+@endif
 <div class="d-flex flex-column flex-column-fluid">
 	<!--begin::Toolbar-->
 	<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
@@ -88,7 +92,7 @@
 
 									<!--end::Table row-->
 
-				@foreach($shops as $shop)
+									@foreach($shops as $shop)
 
 									<tr class="odd">
 

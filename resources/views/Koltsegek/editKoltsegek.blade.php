@@ -58,8 +58,9 @@
 					<div class="card-body">
 						<!--begin::Row-->
 						<div class="row g-5 g-xl-10 mb-xl-10">
-							<form id="kt_ecommerce_settings_general_form" class="form" action="{{ url('koltsegek/store')}}" method="post" role="form"> <input type="hidden" name="csrfmiddlewaretoken" value="ETz0Pvk8FWRk8noHS67Chq67ANXAFbkRl6thblKbErHkOzhmTuHJeMGvSglfIEJg">
+							<form id="kt_ecommerce_settings_general_form" class="form" action="{{ url('koltsegek/update')}}" method="post" role="form"> <input type="hidden" name="csrfmiddlewaretoken" value="ETz0Pvk8FWRk8noHS67Chq67ANXAFbkRl6thblKbErHkOzhmTuHJeMGvSglfIEJg">
 								@csrf()
+								<input type="hidden" name="id" value="{{$koltsegek->id}}">
 								<!--begin::Input group-->
 								<div class="row fv-row mb-7">
 									<div class="col-md-3 text-md-end">
@@ -73,7 +74,7 @@
 									<div class="col-md-9">
 										<!--begin::Input-->
 
-										<input type="text" name="name" maxlength="200" class="form-control form-control-solid" required="" id="id_name">
+										<input type="text" value="{{$koltsegek->name}}" name="name" maxlength="200" class="form-control form-control-solid" required="" id="id_name">
 										<!--end::Input-->
 									</div>
 								</div>
@@ -92,7 +93,7 @@
 									<div class="col-md-9">
 										<!--begin::Input-->
 
-										<input type="text" name="description" maxlength="200" class="form-control form-control-solid" id="id_description">
+										<input type="text" value="{{$koltsegek->description}}" name="description" maxlength="200" class="form-control form-control-solid" id="id_description">
 										<!--end::Input-->
 									</div>
 								</div>
@@ -117,7 +118,7 @@
 										</label>
 
 										<label class="form-check form-check-custom form-check-solid form-check-success flex-shrink-0 me-6">
-											<label for="id_expense_status_1"><input type="radio" name="expense_status" value="Egyéb" checked id="id_expense_status_1">
+											<label for="id_expense_status_1"><input type="radio" name="expense_status" value="Egyéb" id="id_expense_status_1">
 												Egyéb</label>
 										</label>
 

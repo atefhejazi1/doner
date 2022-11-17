@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Expenditure;
 use App\Http\Requests\StoreExpenditureRequest;
 use App\Http\Requests\UpdateExpenditureRequest;
+use App\Models\Költségek;
+use Illuminate\Http\Request;
 
 class ExpenditureController extends Controller
 {
@@ -15,7 +17,9 @@ class ExpenditureController extends Controller
      */
     public function index()
     {
-        return view('expenditures.allExpenditures');
+        $expenditures = Expenditure::all();
+        $koltsegeks = Költségek::all();
+        return view('expenditures.allExpenditures', compact('expenditures', 'koltsegeks'));
     }
 
     /**
@@ -26,7 +30,8 @@ class ExpenditureController extends Controller
     public function create()
     {
         //
-        return view('expenditures.addExpenditure');
+        $koltsegeks = Költségek::all();
+        return view('expenditures.addExpenditure', compact('koltsegeks'));
     }
 
     /**
@@ -35,9 +40,15 @@ class ExpenditureController extends Controller
      * @param  \App\Http\Requests\StoreExpenditureRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreExpenditureRequest $request)
+    public function store(Request $request)
     {
-        //
+        $expenditure = new Expenditure;
+
+        $expenditure->date = $request->date;
+        $expenditure->id_költségek = $request->id_költségek;
+        $expenditure->amount = $request->amount;
+        $expenditure->save();
+        return redirect('expenditures/all')->with('success', 'Elküldve.');;
     }
 
     /**
@@ -57,9 +68,11 @@ class ExpenditureController extends Controller
      * @param  \App\Models\Expenditure  $expenditure
      * @return \Illuminate\Http\Response
      */
-    public function edit(Expenditure $expenditure)
+    public function edit($id)
     {
-        //
+        $expenditure = Expenditure::find($id);
+        $koltsegeks = Költségek::all();
+        return view('expenditures.editExpenditure', compact('expenditure', 'koltsegeks'));
     }
 
     /**
@@ -69,10 +82,18 @@ class ExpenditureController extends Controller
      * @param  \App\Models\Expenditure  $expenditure
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateExpenditureRequest $request, Expenditure $expenditure)
+    public function update(Request $request)
     {
-        //
-    }
+        Expenditure::where('id', $request->id)
+        ->update(
+            [
+                'date' => $request->date,
+                'id_költségek' => $request->id_költségek ,
+                'amount' => $request->amount
+            ],
+        );
+        
+    return redirect('expenditures/all');    }
 
     /**
      * Remove the specified resource from storage.
@@ -80,8 +101,11 @@ class ExpenditureController extends Controller
      * @param  \App\Models\Expenditure  $expenditure
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Expenditure $expenditure)
+    public function destroy($id)
     {
-        //
+        $expenditure = Expenditure::find($id);
+
+        $expenditure->delete();
+        return redirect('expenditures/all');
     }
 }

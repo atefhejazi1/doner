@@ -4,6 +4,12 @@
 @section('title', 'CenterItems')
 @section('app-main')
 
+@if (Session::has('success'))
+    <div class="alert alert-success">
+            <li>{!! \Session::get('success') !!}</li>
+    </div>
+@endif
+
 <!--begin::Toolbar-->
 <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
 	<!--begin::Toolbar container-->
@@ -53,7 +59,7 @@
 				<!--begin::Card toolbar-->
 				<div class="card-toolbar">
 					<!--begin::Add customer-->
-					<a href="/center/addbandcenter/" class="btn btn-primary">Új CenterItem</a>
+					<a href="{{url('centerItem/add')}}" class="btn btn-primary">Új CenterItem</a>
 					<!--end::Add customer-->
 				</div>
 				<!--end::Card toolbar-->

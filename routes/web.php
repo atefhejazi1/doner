@@ -33,11 +33,11 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/register', function () {
-    return view('auth.login');
-});
+// Route::get('/register', function () {
+//     return view('auth.login');
+// });
 
-Route::prefix('worker')->controller(WorkerController::class)->group(function () {
+Route::prefix('worker')->controller(WorkerController::class)->middleware('auth')->group(function () {
     Route::get('/all', 'index');
     Route::get('/add', 'create');
     Route::post('/store', 'store');
@@ -46,7 +46,7 @@ Route::prefix('worker')->controller(WorkerController::class)->group(function () 
     Route::get('/delete/{id}', 'destroy');
 });
 
-Route::prefix('centerItem')->controller(CenterItemController::class)->group(function () {
+Route::prefix('centerItem')->controller(CenterItemController::class)->middleware('auth')->group(function () {
     Route::get('/allCenterItems', 'index');
     Route::get('/add', 'create');
     Route::post('/store', 'store');
@@ -55,7 +55,7 @@ Route::prefix('centerItem')->controller(CenterItemController::class)->group(func
     Route::get('/delete/{id}', 'destroy');
 });
 
-Route::prefix('shops')->controller(ShopsController::class)->group(function () {
+Route::prefix('shops')->controller(ShopsController::class)->middleware('auth')->group(function () {
     Route::get('/all', 'index');
     Route::get('/add', 'create');
     Route::post('/store', 'store');
@@ -63,18 +63,34 @@ Route::prefix('shops')->controller(ShopsController::class)->group(function () {
     Route::post('/update', 'update');
     Route::get('/delete/{id}', 'destroy');
 });
-Route::prefix('users')->controller(UserController::class)->group(function () {
+
+
+
+
+Route::prefix('koltsegek')->controller(KoltsegekController::class)->middleware('auth')->group(function () {
     Route::get('/all', 'index');
     Route::get('/add', 'create');
+    Route::post('/store', 'store');
+    Route::get('/edit/{id}', 'edit');
+    Route::post('/update', 'update');
+    Route::get('/delete/{id}', 'destroy');
 });
 
-Route::prefix('expenditures')->controller(ExpenditureController::class)->group(function () {
+Route::prefix('expenditures')->controller(ExpenditureController::class)->middleware('auth')->group(function () {
     Route::get('/all', 'index');
     Route::get('/add', 'create');
+    Route::post('/store', 'store');
+    Route::get('/edit/{id}', 'edit');
+    Route::post('/update', 'update');
+    Route::get('/delete/{id}', 'destroy');
 });
 
-
-Route::prefix('koltsegek')->controller(KoltsegekController::class)->group(function () {
+Route::prefix('users')->controller(UserController::class)->middleware('auth')->group(function () {
     Route::get('/all', 'index');
     Route::get('/add', 'create');
+    Route::post('/store', 'store');
+});
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('roles', 'RoleController');
 });

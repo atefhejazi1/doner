@@ -46,7 +46,7 @@ class ShopsController extends Controller
         $shop->tax_number = $request->tax_number;
         $shop->shop_address = $request->shop_address;
         $shop->save();
-        return redirect('shops/all');
+        return redirect('shops/all')->with('success', 'Elküldve.');
     }
 
     /**

@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('expenditures', function (Blueprint $table) {
             $table->id();
+            $table->date('date');
+            $table->unsignedBigInteger('id_költségek');
+            $table->foreign('id_költségek')->references('id')->on('költségeks');
+            $table->integer('amount');
             $table->timestamps();
         });
     }
